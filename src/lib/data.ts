@@ -167,6 +167,17 @@ export const publications = [
 
 export const projects = [
   {
+    title: "TrendScope",
+    description:
+      "AI agent for content strategy — analyzes live YouTube trends, scores each by velocity, engagement, and competition, then delivers a ranked action plan with titles, hooks, and timing rationale via a ReAct reasoning loop.",
+    tags: ["ReAct Agent", "FastAPI", "Next.js", "LiteLLM", "GPT-4o-mini", "YouTube API", "Python"],
+    color: "#00d4ff",
+    icon: "📈",
+    github: "https://github.com/Ramidoz/Trendscout",
+    live: "https://frontend-ramidozs-projects.vercel.app",
+    highlights: ["ReAct agent loop", "Custom scoring algorithm", "Real-time trend signals"],
+  },
+  {
     title: "AI Voice FAQ Assistant",
     description:
       "Conversational FAQ system powered by Google Gemini Pro with a full RAG pipeline — enabling semantic search over a product knowledge base with real-time voice interaction.",
