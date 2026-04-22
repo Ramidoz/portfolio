@@ -167,6 +167,17 @@ export const publications = [
 
 export const projects = [
   {
+    title: "Maez — A Digital Companion",
+    description:
+      "A new kind of AI companion that grows, learns, and bonds with a single user for life. Runs locally on consumer hardware with persistent memory, a self-evolving cognitive loop, and proposal-based autonomy — the user owns the credentials, Maez owns the intent.",
+    tags: ["Local LLMs", "llama.cpp", "Persistent Memory", "Agentic Systems", "RAG", "Python", "CUDA", "Self-Improvement"],
+    color: "#e879f9",
+    icon: "🫂",
+    github: "https://github.com/Ramidoz",
+    live: "https://maez.live",
+    highlights: ["Lifetime bond, one user", "Runs on-device (RTX 4090)", "Self-evolving cognition"],
+  },
+  {
     title: "TrendScope",
     description:
       "AI agent for content strategy — analyzes live YouTube trends, scores each by velocity, engagement, and competition, then delivers a ranked action plan with titles, hooks, and timing rationale via a ReAct reasoning loop.",
