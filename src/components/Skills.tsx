@@ -40,7 +40,7 @@ export default function Skills() {
           className="flex items-center gap-4 mb-16"
         >
           <span className="font-mono text-accent text-sm tracking-widest">03.</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Skills</h2>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-white">Skills</h2>
           <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent ml-4" />
         </motion.div>
 

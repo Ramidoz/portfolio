@@ -11,12 +11,20 @@ import Contact from "@/components/Contact";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
+import Aurora from "@/components/Aurora";
+import BootLoader from "@/components/BootLoader";
+import CommandPalette from "@/components/CommandPalette";
+import SectionRail from "@/components/SectionRail";
 
 export default function Home() {
   return (
     <>
+      <BootLoader />
+      <Aurora />
       <CustomCursor />
       <ScrollProgress />
+      <CommandPalette />
+      <SectionRail />
       <SmoothScroll>
         <Navigation />
         <main>

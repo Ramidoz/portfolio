@@ -4,6 +4,35 @@ import { motion } from "framer-motion";
 
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%";
 
+/* Magnetic wrapper — children drift toward the cursor while hovered */
+function Magnetic({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const onMove = (e: React.PointerEvent) => {
+    const el = ref.current;
+    if (!el || window.matchMedia("(hover: none)").matches) return;
+    const r = el.getBoundingClientRect();
+    const x = e.clientX - r.left - r.width / 2;
+    const y = e.clientY - r.top - r.height / 2;
+    el.style.transform = `translate(${x * 0.18}px, ${y * 0.3}px)`;
+  };
+
+  const onLeave = () => {
+    if (ref.current) ref.current.style.transform = "";
+  };
+
+  return (
+    <div
+      ref={ref}
+      onPointerMove={onMove}
+      onPointerLeave={onLeave}
+      className="transition-transform duration-300 ease-out will-change-transform"
+    >
+      {children}
+    </div>
+  );
+}
+
 function scramble(el: HTMLElement, finalText: string, duration = 1200) {
   let frame = 0;
   const totalFrames = Math.round(duration / 16);
@@ -106,6 +135,8 @@ export default function Hero() {
 
     let nodeGrid: Node[][] = [];
     const pulses: Pulse[] = [];
+    const mouse = { x: -9999, y: -9999 };
+    const MOUSE_RADIUS = 150;
 
     // Build node positions based on current canvas size
     const buildNodes = (): Node[][] => {
@@ -147,6 +178,20 @@ export default function Hero() {
     };
     resize();
     window.addEventListener("resize", resize);
+
+    // Cursor proximity lights up nearby nodes; a click fires a fresh cascade
+    const onPointerMove = (e: PointerEvent) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+    const onPointerLeave = () => {
+      mouse.x = -9999;
+      mouse.y = -9999;
+    };
+    const onPointerDown = () => spawnCascade();
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerdown", onPointerDown);
+    document.documentElement.addEventListener("pointerleave", onPointerLeave);
 
     // Spawn floating snippets
     const snippets: Snippet[] = ML_SNIPPETS.map((text) => ({
@@ -291,7 +336,10 @@ export default function Hero() {
           // Idle breath
           nd.breath += nd.breathSpeed;
           const breathVal = (Math.sin(nd.breath) * 0.5 + 0.5) * 0.12;
-          const totalGlow = Math.max(nd.glow, breathVal);
+          // Cursor proximity boost — nodes light up as the pointer approaches
+          const dm = Math.hypot(nd.x - mouse.x, nd.y - mouse.y);
+          const mouseBoost = dm < MOUSE_RADIUS ? (1 - dm / MOUSE_RADIUS) * 0.85 : 0;
+          const totalGlow = Math.max(nd.glow, breathVal, mouseBoost);
 
           const baseR = 3.5;
           const glowR = baseR + totalGlow * 14;
@@ -347,6 +395,9 @@ export default function Hero() {
       clearInterval(spawnInterval);
       initTimers.forEach(clearTimeout);
       window.removeEventListener("resize", resize);
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerdown", onPointerDown);
+      document.documentElement.removeEventListener("pointerleave", onPointerLeave);
     };
   }, []);
 
@@ -422,9 +473,9 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.4 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-black mb-4 leading-none tracking-tight"
+          className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-4 leading-none tracking-tight"
         >
-          <span ref={nameRef} className="gradient-text text-glow">
+          <span ref={nameRef} className="gradient-text-animated">
             {"R#hît @nànt#àn"}
           </span>
         </motion.h1>
@@ -485,51 +536,57 @@ export default function Hero() {
           transition={{ delay: 1.6, duration: 0.6 }}
           className="flex flex-wrap items-center justify-center gap-4"
         >
-          <button
-            onClick={scrollToAbout}
-            className="relative px-8 py-3.5 rounded-xl bg-accent text-background font-semibold text-sm tracking-wide overflow-hidden group"
-          >
-            <span className="relative z-10 group-hover:text-white transition-colors">
-              View My Work
-            </span>
-            <motion.div
-              className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              style={{ borderRadius: "inherit" }}
-            />
-            <div className="absolute inset-0 glow-cyan opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
-          </button>
-
-          <a
-            href="/Rohit_Ananthan_Resume.docx"
-            download
-            className="px-8 py-3.5 rounded-xl font-semibold text-sm tracking-wide flex items-center gap-2 transition-all duration-300 group"
-            style={{
-              background: "rgba(124,58,237,0.15)",
-              border: "1px solid rgba(124,58,237,0.4)",
-              color: "#c4b5fd",
-            }}
-          >
-            <svg
-              width="15" height="15" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" strokeWidth="2.5"
-              strokeLinecap="round" strokeLinejoin="round"
-              className="group-hover:translate-y-0.5 transition-transform"
+          <Magnetic>
+            <button
+              onClick={scrollToAbout}
+              className="relative px-8 py-3.5 rounded-xl bg-accent text-background font-semibold text-sm tracking-wide overflow-hidden group"
             >
-              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            <span className="group-hover:text-white transition-colors">Download Resume</span>
-          </a>
+              <span className="relative z-10 group-hover:text-white transition-colors">
+                View My Work
+              </span>
+              <motion.div
+                className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ borderRadius: "inherit" }}
+              />
+              <div className="absolute inset-0 glow-cyan opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+            </button>
+          </Magnetic>
 
-          <a
-            href="https://www.linkedin.com/in/rohit-ananthan/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-3.5 rounded-xl border border-white/15 text-white/70 font-semibold text-sm tracking-wide hover:border-accent/50 hover:text-accent transition-all duration-300"
-          >
-            LinkedIn →
-          </a>
+          <Magnetic>
+            <a
+              href="/Rohit_Ananthan_Resume.docx"
+              download
+              className="px-8 py-3.5 rounded-xl font-semibold text-sm tracking-wide flex items-center gap-2 transition-all duration-300 group"
+              style={{
+                background: "rgba(124,58,237,0.15)",
+                border: "1px solid rgba(124,58,237,0.4)",
+                color: "#c4b5fd",
+              }}
+            >
+              <svg
+                width="15" height="15" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth="2.5"
+                strokeLinecap="round" strokeLinejoin="round"
+                className="group-hover:translate-y-0.5 transition-transform"
+              >
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              <span className="group-hover:text-white transition-colors">Download Resume</span>
+            </a>
+          </Magnetic>
+
+          <Magnetic>
+            <a
+              href="https://www.linkedin.com/in/rohit-ananthan/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3.5 rounded-xl border border-white/15 text-white/70 font-semibold text-sm tracking-wide hover:border-accent/50 hover:text-accent transition-all duration-300 block"
+            >
+              LinkedIn →
+            </a>
+          </Magnetic>
         </motion.div>
       </div>
 
@@ -539,7 +596,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 0.6 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-text-secondary hover:text-accent transition-colors group"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-text-secondary hover:text-accent transition-colors group"
       >
         <span className="text-xs font-mono tracking-widest uppercase opacity-60">Scroll</span>
         <motion.div

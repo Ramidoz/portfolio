@@ -168,6 +168,7 @@ export const publications = [
 export const projects = [
   {
     title: "Maez — A Digital Companion",
+    category: "genai",
     description:
       "A new kind of AI companion that grows, learns, and bonds with a single user for life. Runs locally on consumer hardware with persistent memory, a self-evolving cognitive loop, and proposal-based autonomy — the user owns the credentials, Maez owns the intent.",
     tags: ["Local LLMs", "llama.cpp", "Persistent Memory", "Agentic Systems", "RAG", "Python", "CUDA", "Self-Improvement"],
@@ -179,6 +180,7 @@ export const projects = [
   },
   {
     title: "TrendScope",
+    category: "genai",
     description:
       "AI agent for content strategy — analyzes live YouTube trends, scores each by velocity, engagement, and competition, then delivers a ranked action plan with titles, hooks, and timing rationale via a ReAct reasoning loop.",
     tags: ["ReAct Agent", "FastAPI", "Next.js", "LiteLLM", "GPT-4o-mini", "YouTube API", "Python"],
@@ -190,6 +192,7 @@ export const projects = [
   },
   {
     title: "AI Voice FAQ Assistant",
+    category: "genai",
     description:
       "Conversational FAQ system powered by Google Gemini Pro with a full RAG pipeline — enabling semantic search over a product knowledge base with real-time voice interaction.",
     tags: ["Gemini Pro", "RAG", "LlamaIndex", "Pinecone", "FastAPI", "NLP"],
@@ -200,6 +203,7 @@ export const projects = [
   },
   {
     title: "Real-time Fraud Detection System",
+    category: "ml",
     description:
       "Production-grade fraud detection engine using Neo4j graph relationships and XGBoost — processing 5M+ daily transactions with 18% reduction in false positives.",
     tags: ["Neo4j", "XGBoost", "PySpark", "AWS", "Graph ML", "Streaming"],
@@ -210,6 +214,7 @@ export const projects = [
   },
   {
     title: "Gym Aesthetic Trap",
+    category: "research",
     description:
       "NLP research project using LDA topic modeling to analyze online discourse around SARMs and steroid usage — uncovering themes, risk perception patterns, and community sentiment from bodybuilding forums.",
     tags: ["NLP", "LDA", "Python", "Topic Modeling", "Scikit-learn", "Reddit"],
@@ -220,6 +225,7 @@ export const projects = [
   },
   {
     title: "Thermal Error ML Modeling",
+    category: "research",
     description:
       "Published Springer research on machine learning compensation strategies for thermal deformation in precision machine tools — achieving state-of-the-art accuracy in error prediction.",
     tags: ["Machine Learning", "MATLAB", "Regression", "Manufacturing", "Springer"],

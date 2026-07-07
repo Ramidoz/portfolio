@@ -1,11 +1,19 @@
 "use client";
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useSpring } from "framer-motion";
 import { experiences } from "@/lib/data";
 
 export default function Experience() {
   const ref = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  // Timeline line draws itself as you scroll through the section
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 75%", "end 55%"],
+  });
+  const lineScale = useSpring(scrollYProgress, { stiffness: 90, damping: 26 });
 
   return (
     <section id="experience" ref={ref} className="py-24 px-6 md:px-12 lg:px-24 bg-surface/30">
@@ -18,18 +26,18 @@ export default function Experience() {
           className="flex items-center gap-4 mb-16"
         >
           <span className="font-mono text-accent text-sm tracking-widest">02.</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Experience</h2>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-white">Experience</h2>
           <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent ml-4" />
         </motion.div>
 
         {/* Timeline */}
-        <div className="relative">
-          {/* Vertical line */}
+        <div className="relative" ref={timelineRef}>
+          {/* Track (faint) */}
+          <div className="absolute left-4 md:left-8 top-0 bottom-0 w-px bg-white/[0.06]" />
+          {/* Progress line — driven by scroll position */}
           <motion.div
-            initial={{ scaleY: 0 }}
-            animate={inView ? { scaleY: 1 } : {}}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="absolute left-4 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-accent/60 via-accent-purple/40 to-transparent origin-top"
+            style={{ scaleY: lineScale }}
+            className="absolute left-4 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-accent via-accent-purple to-[#c026d3] origin-top shadow-[0_0_12px_rgba(0,212,255,0.5)]"
           />
 
           <div className="space-y-10">

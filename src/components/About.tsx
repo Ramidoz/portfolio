@@ -59,7 +59,7 @@ export default function About() {
           className="flex items-center gap-4 mb-16"
         >
           <span className="font-mono text-accent text-sm tracking-widest">01.</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">About Me</h2>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-white">About Me</h2>
           <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent ml-4" />
         </motion.div>
 
@@ -151,6 +151,36 @@ export default function About() {
             </motion.div>
           </motion.div>
         </div>
+
+        {/* profile.py terminal */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5, duration: 0.7, ease: "easeOut" }}
+          className="terminal-window rounded-2xl overflow-hidden mt-16"
+        >
+          <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/[0.07] bg-white/[0.03]">
+            <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+            <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
+            <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+            <span className="ml-3 text-xs text-text-secondary">rohit@portfolio: ~/profile.py</span>
+            <span className="ml-auto text-[10px] text-white/25 font-mono hidden sm:block">python 3.12 · venv active</span>
+          </div>
+          <div className="p-6 overflow-x-auto text-[13px] leading-[1.9]">
+            <pre className="font-mono">
+<span className="tk-kw">class</span> <span className="tk-cls">DataScientist</span>:{"\n"}
+{"    "}<span className="tk-kw">def</span> <span className="tk-fn">__init__</span>(<span className="tk-var">self</span>):{"\n"}
+{"        "}<span className="tk-var">self</span>.name      = <span className="tk-str">&quot;Rohit Ananthan&quot;</span>{"\n"}
+{"        "}<span className="tk-var">self</span>.focus     = [<span className="tk-str">&quot;GenAI &amp; RAG&quot;</span>, <span className="tk-str">&quot;MLOps&quot;</span>, <span className="tk-str">&quot;Graph ML&quot;</span>, <span className="tk-str">&quot;Product Analytics&quot;</span>]{"\n"}
+{"        "}<span className="tk-var">self</span>.stack     = {"{"}<span className="tk-str">&quot;lang&quot;</span>: <span className="tk-str">&quot;Python&quot;</span>, <span className="tk-str">&quot;cloud&quot;</span>: [<span className="tk-str">&quot;GCP&quot;</span>, <span className="tk-str">&quot;AWS&quot;</span>], <span className="tk-str">&quot;llm&quot;</span>: <span className="tk-str">&quot;GPT-4o&quot;</span>{"}"}{"\n"}
+{"        "}<span className="tk-var">self</span>.education = [<span className="tk-str">&quot;MS InfoSys @ UMD&quot;</span>, <span className="tk-str">&quot;B.Tech @ IIIT Chennai&quot;</span>]{"\n"}
+{"\n"}
+{"    "}<span className="tk-kw">def</span> <span className="tk-fn">mission</span>(<span className="tk-var">self</span>) -&gt; <span className="tk-cls">Impact</span>:{"\n"}
+{"        "}<span className="tk-cmt"># raw data in → business impact out</span>{"\n"}
+{"        "}<span className="tk-kw">return</span> <span className="tk-fn">bridge</span>(technology, business_value)  <span className="tk-cmt"># converged ✓</span>
+            </pre>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

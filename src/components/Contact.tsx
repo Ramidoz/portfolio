@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const links = [
@@ -53,7 +53,7 @@ export default function Contact() {
           className="flex items-center gap-4 mb-16"
         >
           <span className="font-mono text-accent text-sm tracking-widest">08.</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Contact</h2>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-white">Contact</h2>
           <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent ml-4" />
         </motion.div>
 
@@ -121,6 +121,9 @@ export default function Contact() {
             ))}
           </div>
 
+          {/* Direct transmission form */}
+          <ContactForm inView={inView} />
+
           {/* Availability banner */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -155,5 +158,74 @@ export default function Contact() {
         </p>
       </motion.footer>
     </section>
+  );
+}
+
+function ContactForm({ inView }: { inView: boolean }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Portfolio contact — ${name}`);
+    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+    window.location.href = `mailto:rohitananthan123@gmail.com?subject=${subject}&body=${body}`;
+  };
+
+  const inputCls =
+    "w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3.5 text-sm text-white placeholder-white/25 outline-none transition-all duration-300 focus:border-accent/60 focus:shadow-[0_0_0_3px_rgba(0,212,255,0.10),0_0_24px_rgba(0,212,255,0.12)]";
+
+  return (
+    <motion.form
+      onSubmit={submit}
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: 0.6, duration: 0.6 }}
+      className="glass mx-auto mb-16 max-w-2xl rounded-2xl p-7 text-left"
+    >
+      <div className="mb-4 flex items-center gap-2 font-mono text-xs text-accent/60 tracking-widest">
+        <span className="text-accent/30">$</span>
+        <span>send_message --to rohit --priority high</span>
+      </div>
+      <div className="mb-4 grid gap-4 sm:grid-cols-2">
+        <input
+          required
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="your_name"
+          className={inputCls}
+          aria-label="Your name"
+        />
+        <input
+          required
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+          className={inputCls}
+          aria-label="Your email"
+        />
+      </div>
+      <textarea
+        required
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="// describe your mission…"
+        rows={5}
+        className={`${inputCls} mb-5 resize-y`}
+        aria-label="Your message"
+      />
+      <button
+        type="submit"
+        className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-accent to-accent-purple px-8 py-3.5 text-sm font-semibold tracking-wide text-background transition-shadow duration-300 hover:shadow-[0_10px_40px_rgba(0,212,255,0.35)]"
+      >
+        <span className="relative z-10">Transmit Message ⟶</span>
+        <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+      </button>
+      <p className="mt-3 text-center font-mono text-[11px] text-white/25">
+        transmission routed via your default mail client
+      </p>
+    </motion.form>
   );
 }
