@@ -9,6 +9,7 @@ const SECTIONS = [
   { id: "education", label: "Education" },
   { id: "certifications", label: "Certs" },
   { id: "publications", label: "Publications" },
+  { id: "model-card", label: "Model Card" },
   { id: "contact", label: "Contact" },
 ];
 

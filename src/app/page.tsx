@@ -15,6 +15,10 @@ import Aurora from "@/components/Aurora";
 import BootLoader from "@/components/BootLoader";
 import CommandPalette from "@/components/CommandPalette";
 import SectionRail from "@/components/SectionRail";
+import Terminal from "@/components/Terminal";
+import Overdrive from "@/components/Overdrive";
+import StatusBar from "@/components/StatusBar";
+import ModelCard from "@/components/ModelCard";
 
 export default function Home() {
   return (
@@ -24,6 +28,9 @@ export default function Home() {
       <CustomCursor />
       <ScrollProgress />
       <CommandPalette />
+      <Terminal />
+      <Overdrive />
+      <StatusBar />
       <SectionRail />
       <SmoothScroll>
         <Navigation />
@@ -36,6 +43,7 @@ export default function Home() {
           <Education />
           <Certifications />
           <Publications />
+          <ModelCard />
           <Contact />
         </main>
       </SmoothScroll>

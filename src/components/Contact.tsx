@@ -52,7 +52,7 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-4 mb-16"
         >
-          <span className="font-mono text-accent text-sm tracking-widest">08.</span>
+          <span className="font-mono text-accent text-sm tracking-widest">09.</span>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white">Contact</h2>
           <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent ml-4" />
         </motion.div>
@@ -155,6 +155,10 @@ export default function Contact() {
           <span className="text-white/40">{new Date().getFullYear()}</span>
           <span className="text-white/20 mx-2">·</span>
           <span className="text-white/25 text-xs">no_grad() · no_bugs() 🤞</span>
+        </p>
+        <p className="text-white/20 text-[11px] font-mono mt-2">
+          psst — press <kbd className="border border-white/15 rounded px-1">`</kbd> for a shell,
+          or try ↑↑↓↓←→←→BA
         </p>
       </motion.footer>
     </section>
