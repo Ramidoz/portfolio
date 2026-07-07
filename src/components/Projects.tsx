@@ -1,11 +1,23 @@
 "use client";
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { projects } from "@/lib/data";
+
+const FILTERS = [
+  { id: "all", label: "all_systems" },
+  { id: "genai", label: "genai_&_agents" },
+  { id: "ml", label: "ml_&_graph" },
+  { id: "research", label: "nlp_&_research" },
+];
 
 export default function Projects() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [filter, setFilter] = useState("all");
+
+  const visible = projects.filter(
+    (p) => filter === "all" || p.category === filter
+  );
 
   return (
     <section id="projects" ref={ref} className="py-24 px-6 md:px-12 lg:px-24">
@@ -15,19 +27,43 @@ export default function Projects() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-4 mb-16"
+          className="flex items-center gap-4 mb-10"
         >
           <span className="font-mono text-accent text-sm tracking-widest">04.</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Projects</h2>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-white">Projects</h2>
           <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent ml-4" />
         </motion.div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((project, i) => (
-            <TiltCard key={i} project={project} i={i} inView={inView} />
+        {/* Filters */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          className="flex flex-wrap gap-2.5 mb-12"
+        >
+          {FILTERS.map((f) => (
+            <button
+              key={f.id}
+              onClick={() => setFilter(f.id)}
+              className={`font-mono text-xs px-4 py-2 rounded-full border transition-all duration-300 ${
+                filter === f.id
+                  ? "bg-gradient-to-r from-accent to-accent-purple text-background border-transparent shadow-[0_6px_24px_rgba(0,212,255,0.35)] font-semibold"
+                  : "border-white/10 text-text-secondary hover:text-white hover:border-white/25 bg-white/[0.02]"
+              }`}
+            >
+              {f.label}
+            </button>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Grid */}
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <AnimatePresence mode="popLayout">
+            {visible.map((project, i) => (
+              <TiltCard key={project.title} project={project} i={i} inView={inView} />
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );
@@ -51,6 +87,9 @@ function TiltCard({
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
     el.style.transform = `perspective(900px) rotateX(${-y * 9}deg) rotateY(${x * 9}deg) translateZ(8px) scale(1.01)`;
+    // Spotlight position for the .spotlight-card highlight
+    el.style.setProperty("--mx", `${(x + 0.5) * 100}%`);
+    el.style.setProperty("--my", `${(y + 0.5) * 100}%`);
   };
 
   const handleMouseLeave = () => {
@@ -61,15 +100,17 @@ function TiltCard({
 
   return (
     <motion.div
+      layout
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
+      exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.22, delay: 0 } }}
       transition={{ delay: 0.15 + i * 0.12, duration: 0.6, ease: "easeOut" }}
     >
       <div
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="tilt-card glass rounded-2xl p-7 flex flex-col gap-5 group h-full"
+        className="tilt-card spotlight-card glass rounded-2xl p-7 flex flex-col gap-5 group h-full"
         style={{ transition: "transform 0.12s ease-out, border-color 0.3s ease" }}
       >
         {/* Color glow on hover */}
