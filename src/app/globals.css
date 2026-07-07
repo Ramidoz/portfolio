@@ -283,6 +283,25 @@ body {
 @keyframes caret-blink { 50% { opacity: 0; } }
 .caret-blink { animation: caret-blink 1s steps(1) infinite; }
 
+/* ── Overdrive mode (konami / terminal / palette) ── */
+:root.overdrive .aurora-layer {
+  opacity: 0.78;
+  animation: overdrive-hue 9s linear infinite;
+}
+@keyframes overdrive-hue {
+  from { filter: blur(110px) saturate(190%) hue-rotate(0deg); }
+  to   { filter: blur(110px) saturate(190%) hue-rotate(360deg); }
+}
+:root.overdrive .marquee-track {
+  animation-duration: 10s !important;
+}
+:root.overdrive .gradient-text-animated {
+  animation-duration: 1.6s;
+}
+:root.overdrive .scanline {
+  animation-duration: 2.5s;
+}
+
 /* Reduced motion: kill decorative animation */
 @media (prefers-reduced-motion: reduce) {
   .aurora-layer span,

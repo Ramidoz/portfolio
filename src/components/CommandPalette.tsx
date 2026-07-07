@@ -43,7 +43,20 @@ export default function CommandPalette() {
       { id: "education", label: "Go to Education", hint: "05", icon: "◈", keywords: "education degree umd iiit school", run: () => scrollTo("#education") },
       { id: "certifications", label: "Go to Certifications", hint: "06", icon: "◈", keywords: "certifications certs aws neo4j", run: () => scrollTo("#certifications") },
       { id: "publications", label: "Go to Publications", hint: "07", icon: "◈", keywords: "publications research springer paper", run: () => scrollTo("#publications") },
-      { id: "contact", label: "Go to Contact", hint: "08", icon: "◈", keywords: "contact reach hire email", run: () => scrollTo("#contact") },
+      { id: "model-card", label: "Go to Model Card", hint: "08", icon: "◈", keywords: "model card specs benchmarks evals huggingface", run: () => scrollTo("#model-card") },
+      { id: "contact", label: "Go to Contact", hint: "09", icon: "◈", keywords: "contact reach hire email", run: () => scrollTo("#contact") },
+      {
+        id: "terminal", label: "Open Terminal", hint: "`", icon: "❯", keywords: "terminal shell console cli rohit.sh sudo",
+        run: () => { close(); setTimeout(() => window.dispatchEvent(new Event("open-terminal")), 60); },
+      },
+      {
+        id: "overdrive", label: "Toggle Overdrive Mode", hint: "⚡", icon: "◉", keywords: "overdrive konami turbo boost easter egg secret",
+        run: () => {
+          close();
+          document.documentElement.classList.toggle("overdrive");
+          window.dispatchEvent(new Event("overdrive-toggle"));
+        },
+      },
       {
         id: "resume", label: "Download Resume", hint: "↓", icon: "⬇", keywords: "resume cv download docx",
         run: () => { close(); window.location.href = "/Rohit_Ananthan_Resume.docx"; },

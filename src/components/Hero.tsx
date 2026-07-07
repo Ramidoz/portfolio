@@ -226,7 +226,13 @@ export default function Hero() {
     );
 
     const spawnInterval = setInterval(() => {
-      if (pulses.length < 18) spawnCascade();
+      // Overdrive mode triples cascade activity
+      const overdrive = document.documentElement.classList.contains("overdrive");
+      const cap = overdrive ? 44 : 18;
+      const bursts = overdrive ? 3 : 1;
+      for (let k = 0; k < bursts; k++) {
+        if (pulses.length < cap) spawnCascade();
+      }
     }, 900);
 
     // ── Draw loop ──────────────────────────────────
