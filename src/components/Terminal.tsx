@@ -60,8 +60,8 @@ function runCommand(raw: string): { lines: Line[]; action?: string } {
       return {
         lines: [
           ok("Rohit Ananthan — Data Scientist & AI Engineer"),
-          out("4+ years shipping production ML: LLM apps, RAG pipelines,"),
-          out("real-time fraud detection, and graph analytics."),
+          out("4+ years shipping production ML: multi-agent systems, LLM"),
+          out("apps, RAG pipelines, fraud detection, and graph analytics."),
           dim("stack: Python · PySpark · GCP Vertex AI · AWS · Neo4j · GPT-4o"),
         ],
       };
@@ -88,7 +88,8 @@ function runCommand(raw: string): { lines: Line[]; action?: string } {
     case "experience":
       return {
         lines: [
-          ok("2026–now   Data Scientist Consultant @ Invision Global Tech"),
+          ok("2026–now   AI Engineer @ Vdart — multi-agent RFP automation"),
+          out("2026       Data Scientist Consultant @ Invision Global Tech"),
           out("2025–2026  Data Scientist @ Community Dreams Foundation"),
           out("2024       Technical Consultant @ University of Maryland"),
           out("2021–2023  Data Scientist @ Kameleon Technologies"),

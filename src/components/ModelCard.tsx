@@ -6,7 +6,7 @@ const SPECS: [string, string][] = [
   ["parameters", "4+ years of production experience"],
   ["architecture", "human × (ML + GenAI + product sense)"],
   ["context_window", "always open"],
-  ["training_data", "e-commerce · non-profit · enterprise"],
+  ["training_data", "healthcare · e-commerce · non-profit · enterprise"],
   ["fine_tuned_on", "GCP Vertex AI · AWS SageMaker"],
   ["inference_hardware", "coffee ☕ + RTX 4090"],
   ["temperature", "0.7 — creative but reliable"],

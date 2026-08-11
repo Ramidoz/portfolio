@@ -3,7 +3,7 @@ export const profile = {
   pronouns: "He/Him",
   title: "Data Scientist",
   tagline: "Building Intelligent Systems at the Intersection of ML, GenAI & Product Analytics",
-  bio: "Data Scientist with 4+ years building production ML systems across e-commerce, non-profit, and enterprise domains. Specializing in LLM-powered applications, product analytics, real-time anomaly detection, and scalable data engineering pipelines using Python, PySpark, GCP, AWS, and Snowflake.",
+  bio: "Data Scientist with 4+ years building production ML systems across healthcare, e-commerce, non-profit, and enterprise domains. Specializing in multi-agent AI systems, LLM-powered applications, product analytics, real-time anomaly detection, and scalable data engineering pipelines using Python, PySpark, Azure, GCP, and AWS.",
   location: "United States",
   email: "rohitananthan123@gmail.com",
   linkedin: "https://www.linkedin.com/in/rohit-ananthan/",
@@ -19,15 +19,31 @@ export const stats = [
 
 export const experiences = [
   {
+    title: "AI Engineer",
+    company: "Vdart Inc.",
+    type: "Contract",
+    period: "Jun 2026 – Present",
+    duration: "3 mos",
+    location: "Remote",
+    bullets: [
+      "Building a multi-agent AI pipeline that automates the full RFP lifecycle for an enterprise healthcare client — intake, routing, QA review, and scoring — targeting an ~85% reduction in manual processing time",
+      "Agents parse ingested proposal documents into structured records, dispatch each RFP to the right reviewer or workflow branch, and run an automated QA pass before scoring",
+      "Grounded rules-based scoring with retrieval over an Azure AI Search vector index, so evaluation criteria are pulled live at scoring time instead of hardcoded — MongoDB for persistence",
+      "Orchestrating GitHub Copilot coding agents to drive both the Node.js backend and React frontend, including automated git commit workflows",
+    ],
+    tags: ["Multi-Agent AI", "RAG", "Azure AI Search", "MongoDB", "Node.js", "React", "GitHub Copilot"],
+    current: true,
+  },
+  {
     title: "Data Scientist Consultant",
     company: "Invision Global Tech Inc",
     type: "Full-time",
-    period: "Feb 2026 – Present",
-    duration: "2 mos",
+    period: "Feb 2026 – Jun 2026",
+    duration: "5 mos",
     location: "United States",
     bullets: [],
     tags: ["ML", "Python", "Data Science", "Consulting"],
-    current: true,
+    current: false,
   },
   {
     title: "Data Scientist",
@@ -123,11 +139,11 @@ export const education = [
 
 export const skills = {
   "Languages & Libraries": ["Python", "SQL", "R", "PySpark", "MATLAB", "Pandas", "NumPy", "PyTorch", "TensorFlow", "Scikit-learn"],
-  "ML & AI": ["Machine Learning", "Deep Learning", "NLP", "LLMs", "GPT-4o", "RAG", "XGBoost", "GenAI", "A/B Testing", "Causal Inference"],
+  "ML & AI": ["Machine Learning", "Deep Learning", "Multi-Agent Systems", "NLP", "LLMs", "GPT-4o", "RAG", "XGBoost", "GenAI", "A/B Testing", "Causal Inference"],
   "Data Engineering": ["ETL / ELT", "Apache Airflow", "Apache Beam", "Dataflow", "Pub/Sub", "DBT", "MLflow", "CI/CD", "GitHub Actions"],
   "Cloud & Infra": ["GCP Vertex AI", "AWS SageMaker", "Azure", "BigQuery", "Snowflake", "Dataproc", "Cloud Build", "Docker"],
   "BI & Visualization": ["Tableau", "Power BI", "Looker Studio", "Data Storytelling"],
-  "Databases & Search": ["Neo4j", "Pinecone", "LangChain", "LlamaIndex", "ANN Search", "Vector DBs"],
+  "Databases & Search": ["Neo4j", "Azure AI Search", "MongoDB", "Pinecone", "LangChain", "LlamaIndex", "Vector DBs"],
 };
 
 export const certifications = [
