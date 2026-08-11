@@ -58,27 +58,14 @@ export default function Contact() {
         </motion.div>
 
         <div className="max-w-3xl mx-auto text-center">
-          {/* ML terminal header */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className="inline-flex items-center gap-2 font-mono text-xs text-accent/50 mb-4 tracking-widest"
-          >
-            <span className="text-accent/30">$</span>
-            <span>model.deploy(env=&quot;production&quot;, candidate=&quot;rohit&quot;)</span>
-            <span className="w-2 h-4 bg-accent/40 animate-pulse" />
-          </motion.div>
-
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-4xl md:text-5xl font-black mb-6 leading-tight"
           >
-            Ready to{" "}
-            <span className="gradient-text">deploy</span>?<br />
-            Let&apos;s ship something intelligent.
+            Let&apos;s build something{" "}
+            <span className="gradient-text">great</span> together.
           </motion.h3>
 
           <motion.p
@@ -87,12 +74,12 @@ export default function Contact() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="text-text-secondary text-lg mb-12 leading-relaxed"
           >
-            Training complete — now seeking inference in the real world. Open to{" "}
-            <span className="text-white/70">Data Scientist</span>,{" "}
-            <span className="text-white/70">AI Engineer</span>, and{" "}
-            <span className="text-white/70">ML Engineer</span> roles. Whether you
-            have a full-time opportunity or just want to talk about model architectures —
-            my context window is open.
+            I&apos;m currently open to{" "}
+            <span className="text-white/80">Data Scientist</span>,{" "}
+            <span className="text-white/80">AI Engineer</span>, and{" "}
+            <span className="text-white/80">ML Engineer</span> roles. Whether
+            you&apos;re hiring, have a question about my work, or just want to
+            talk data — I&apos;d genuinely love to hear from you.
           </motion.p>
 
           {/* Links */}
@@ -132,10 +119,10 @@ export default function Contact() {
             className="inline-flex items-center gap-3 px-6 py-3 rounded-full glass border border-accent/20"
           >
             <span className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse" />
-            <span className="text-sm text-white/80 font-mono">
-              status: <span className="text-accent font-semibold">&quot;open_to_hire&quot;</span>
+            <span className="text-sm text-white/80">
+              Usually replies within a day
               <span className="text-white/40 mx-2">·</span>
-              <span className="text-white/50">DS · DE · AI Eng</span>
+              <span className="text-white/60">rohitananthan123@gmail.com</span>
             </span>
           </motion.div>
         </div>
@@ -148,17 +135,24 @@ export default function Contact() {
         transition={{ delay: 1, duration: 0.6 }}
         className="mt-24 pt-8 border-t border-white/5 text-center"
       >
-        <p className="text-text-secondary text-sm font-mono">
+        <p className="text-text-secondary text-sm">
           Designed &amp; built by{" "}
           <span className="text-accent">Rohit Ananthan</span>
           {" · "}
           <span className="text-white/40">{new Date().getFullYear()}</span>
-          <span className="text-white/20 mx-2">·</span>
-          <span className="text-white/25 text-xs">no_grad() · no_bugs() 🤞</span>
         </p>
-        <p className="text-white/20 text-[11px] font-mono mt-2">
-          psst — press <kbd className="border border-white/15 rounded px-1">`</kbd> for a shell,
-          or try ↑↑↓↓←→←→BA
+        <p className="text-white/25 text-[11px] font-mono mt-2">
+          for the curious:{" "}
+          <button
+            onClick={() => window.dispatchEvent(new Event("open-terminal"))}
+            className="text-white/40 hover:text-accent transition-colors underline decoration-white/15 underline-offset-2"
+          >
+            ❯_ open the terminal
+          </button>
+          <span className="mx-2 text-white/15">·</span>
+          <kbd className="border border-white/15 rounded px-1">`</kbd> works too
+          <span className="mx-2 text-white/15">·</span>
+          ↑↑↓↓←→←→BA does something
         </p>
       </motion.footer>
     </section>

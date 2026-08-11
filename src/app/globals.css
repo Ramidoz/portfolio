@@ -17,11 +17,6 @@
   margin: 0;
 }
 
-/* Hide default cursor on pointer devices */
-@media (hover: hover) {
-  *, *::before, *::after { cursor: none !important; }
-}
-
 html {
   scroll-behavior: auto; /* lenis handles this */
 }
@@ -108,7 +103,7 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 0;
-  opacity: 0.35;
+  opacity: 0.16;
 }
 
 /* Section spacing */
@@ -182,8 +177,8 @@ body {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  filter: blur(110px) saturate(120%);
-  opacity: 0.4;
+  filter: blur(110px) saturate(110%);
+  opacity: 0.3;
 }
 .aurora-layer span {
   position: absolute;
@@ -256,18 +251,6 @@ body {
 .terminal-window .tk-str { color: #a3e635; }
 .terminal-window .tk-cmt { color: #6b7280; font-style: italic; }
 .terminal-window .tk-var { color: #a78bfa; }
-
-/* Boot loader */
-.boot-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  background: #080808;
-  display: grid;
-  place-items: center;
-  transition: opacity 0.55s ease, visibility 0.55s;
-}
-.boot-overlay.done { opacity: 0; visibility: hidden; }
 
 /* Command palette backdrop */
 .palette-backdrop {
