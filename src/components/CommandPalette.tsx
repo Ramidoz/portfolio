@@ -140,11 +140,12 @@ export default function CommandPalette() {
             onClick={close}
           />
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: -14 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: -14 }}
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.96 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="fixed left-1/2 top-[18vh] z-[9100] w-[min(560px,92vw)] -translate-x-1/2 overflow-hidden rounded-2xl border border-white/10 bg-[#0b0b12]/95 shadow-[0_40px_120px_rgba(0,0,0,0.7),0_0_60px_rgba(0,212,255,0.08)] backdrop-blur-2xl"
+            style={{ x: "-50%" }}
+            className="fixed left-1/2 top-[18vh] z-[9100] w-[min(560px,92vw)] overflow-hidden rounded-2xl border border-white/10 bg-[#0b0b12]/95 shadow-[0_40px_120px_rgba(0,0,0,0.7),0_0_60px_rgba(0,212,255,0.08)] backdrop-blur-2xl"
             role="dialog"
             aria-label="Command palette"
           >
