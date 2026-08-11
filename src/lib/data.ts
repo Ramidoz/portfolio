@@ -26,12 +26,10 @@ export const experiences = [
     duration: "3 mos",
     location: "Remote",
     bullets: [
-      "Building a multi-agent AI pipeline that automates the full RFP lifecycle for an enterprise healthcare client — intake, routing, QA review, and scoring — targeting an ~85% reduction in manual processing time",
-      "Agents parse ingested proposal documents into structured records, dispatch each RFP to the right reviewer or workflow branch, and run an automated QA pass before scoring",
-      "Grounded rules-based scoring with retrieval over an Azure AI Search vector index, so evaluation criteria are pulled live at scoring time instead of hardcoded — MongoDB for persistence",
-      "Orchestrating GitHub Copilot coding agents to drive both the Node.js backend and React frontend, including automated git commit workflows",
+      "Building multi-agent AI systems that automate document-heavy enterprise workflows for a healthcare client (specifics under NDA)",
+      "Working across retrieval-grounded evaluation, agent orchestration, and full-stack delivery — with AI coding agents as part of the development workflow",
     ],
-    tags: ["Multi-Agent AI", "RAG", "Azure AI Search", "MongoDB", "Node.js", "React", "GitHub Copilot"],
+    tags: ["Multi-Agent AI", "RAG", "Azure", "Node.js", "React", "AI-Assisted Delivery"],
     current: true,
   },
   {

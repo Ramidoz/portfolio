@@ -88,7 +88,7 @@ function runCommand(raw: string): { lines: Line[]; action?: string } {
     case "experience":
       return {
         lines: [
-          ok("2026–now   AI Engineer @ Vdart — multi-agent RFP automation"),
+          ok("2026–now   AI Engineer @ Vdart — agentic AI, enterprise healthcare"),
           out("2026       Data Scientist Consultant @ Invision Global Tech"),
           out("2025–2026  Data Scientist @ Community Dreams Foundation"),
           out("2024       Technical Consultant @ University of Maryland"),
