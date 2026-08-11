@@ -289,11 +289,12 @@ export default function Terminal() {
               onClick={close}
             />
             <motion.div
-              initial={{ opacity: 0, y: 24, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 24, scale: 0.97 }}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.22, ease: "easeOut" }}
-              className="fixed left-1/2 top-1/2 z-[9200] w-[min(760px,94vw)] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-white/10 bg-[#07070c]/95 shadow-[0_50px_140px_rgba(0,0,0,0.8),0_0_80px_rgba(0,212,255,0.07)] backdrop-blur-2xl"
+              style={{ x: "-50%", y: "-50%" }}
+              className="fixed left-1/2 top-1/2 z-[9200] w-[min(760px,94vw)] overflow-hidden rounded-2xl border border-white/10 bg-[#07070c]/95 shadow-[0_50px_140px_rgba(0,0,0,0.8),0_0_80px_rgba(0,212,255,0.07)] backdrop-blur-2xl"
               role="dialog"
               aria-label="Interactive terminal"
               onClick={() => inputRef.current?.focus()}

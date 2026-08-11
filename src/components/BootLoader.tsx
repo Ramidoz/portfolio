@@ -5,6 +5,7 @@ const LINES = [
   { text: "initializing ~/rohit.ananthan", status: "OK" },
   { text: "loading neural weights … 847MB", status: "OK" },
   { text: "mounting data pipelines …", status: "OK" },
+  { text: "shell available — press ` any time", status: "TIP" },
   { text: "portfolio online. inference ready.", status: "OK" },
 ];
 
@@ -46,7 +47,7 @@ export default function BootLoader() {
         <div className="min-h-[104px] space-y-1">
           {LINES.slice(0, shown).map((line, i) => (
             <div key={i} className="text-text-secondary">
-              <span className="text-[#a3e635]">[ {line.status} ]</span>{" "}
+              <span className={line.status === "TIP" ? "text-accent" : "text-[#a3e635]"}>[ {line.status} ]</span>{" "}
               {line.text}
             </div>
           ))}

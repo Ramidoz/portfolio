@@ -38,11 +38,12 @@ export default function Overdrive() {
     <AnimatePresence>
       {toast !== null && (
         <motion.div
-          initial={{ opacity: 0, y: -24, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -12, scale: 0.97 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.97 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="fixed left-1/2 top-20 z-[9400] -translate-x-1/2"
+          style={{ x: "-50%" }}
+          className="fixed left-1/2 top-20 z-[9400]"
         >
           <div className="rounded-2xl p-[1.5px] bg-gradient-to-r from-accent via-accent-purple to-[#c026d3] shadow-[0_20px_60px_rgba(0,212,255,0.35)]">
             <div className="rounded-2xl bg-[#0a0a12]/95 px-6 py-3.5 font-mono text-sm flex items-center gap-3">

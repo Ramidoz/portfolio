@@ -6,6 +6,13 @@ export default function CustomCursor() {
   const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [clicking, setClicking] = useState(false);
+  // Server and first client render must agree (hydration), so pointer-device
+  // detection lives in an effect instead of an inline matchMedia check.
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    if (!window.matchMedia("(hover: none)").matches) setEnabled(true);
+  }, []);
 
   const mouseX = useMotionValue(-200);
   const mouseY = useMotionValue(-200);
@@ -55,7 +62,7 @@ export default function CustomCursor() {
     };
   }, []);
 
-  if (typeof window !== "undefined" && window.matchMedia("(hover: none)").matches) return null;
+  if (!enabled) return null;
 
   return (
     <>

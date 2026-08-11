@@ -18,6 +18,7 @@ import SectionRail from "@/components/SectionRail";
 import Terminal from "@/components/Terminal";
 import Overdrive from "@/components/Overdrive";
 import StatusBar from "@/components/StatusBar";
+import HintDock from "@/components/HintDock";
 import ModelCard from "@/components/ModelCard";
 
 export default function Home() {
@@ -31,6 +32,7 @@ export default function Home() {
       <Terminal />
       <Overdrive />
       <StatusBar />
+      <HintDock />
       <SectionRail />
       <SmoothScroll>
         <Navigation />

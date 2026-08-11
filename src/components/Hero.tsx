@@ -594,6 +594,20 @@ export default function Hero() {
             </a>
           </Magnetic>
         </motion.div>
+
+        {/* Hidden-feature hint */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.4, duration: 0.8 }}
+          className="hidden md:block mt-8 font-mono text-[11px] text-white/30"
+        >
+          pro tip: <kbd className="border border-white/15 rounded px-1 text-white/45">`</kbd> opens a shell
+          <span className="mx-2 text-white/15">·</span>
+          <kbd className="border border-white/15 rounded px-1 text-white/45">⌘K</kbd> opens the palette
+          <span className="mx-2 text-white/15">·</span>
+          <span className="text-white/20">and there&apos;s a secret code</span>
+        </motion.p>
       </div>
 
       {/* Scroll indicator */}
