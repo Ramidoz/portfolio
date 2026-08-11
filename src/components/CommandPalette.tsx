@@ -46,6 +46,10 @@ export default function CommandPalette() {
       { id: "model-card", label: "Go to Model Card", hint: "08", icon: "◈", keywords: "model card specs benchmarks evals huggingface", run: () => scrollTo("#model-card") },
       { id: "contact", label: "Go to Contact", hint: "09", icon: "◈", keywords: "contact reach hire email", run: () => scrollTo("#contact") },
       {
+        id: "interview", label: "Ask Rohit Anything", hint: "💬", icon: "◉", keywords: "ask chat questions talk ama interview",
+        run: () => { close(); setTimeout(() => window.dispatchEvent(new Event("open-interview")), 60); },
+      },
+      {
         id: "terminal", label: "Open Terminal", hint: "`", icon: "❯", keywords: "terminal shell console cli rohit.sh sudo",
         run: () => { close(); setTimeout(() => window.dispatchEvent(new Event("open-terminal")), 60); },
       },

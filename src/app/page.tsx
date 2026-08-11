@@ -14,6 +14,7 @@ import Aurora from "@/components/Aurora";
 import CommandPalette from "@/components/CommandPalette";
 import SectionRail from "@/components/SectionRail";
 import Terminal from "@/components/Terminal";
+import InterviewMode from "@/components/InterviewMode";
 import Overdrive from "@/components/Overdrive";
 import ModelCard from "@/components/ModelCard";
 
@@ -24,6 +25,7 @@ export default function Home() {
       <ScrollProgress />
       <CommandPalette />
       <Terminal />
+      <InterviewMode />
       <Overdrive />
       <SectionRail />
       <SmoothScroll>

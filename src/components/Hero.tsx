@@ -550,14 +550,12 @@ export default function Hero() {
           </Magnetic>
 
           <Magnetic>
-            <a
-              href="https://www.linkedin.com/in/rohit-ananthan/"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => window.dispatchEvent(new Event("open-interview"))}
               className="px-8 py-3.5 rounded-xl border border-white/15 text-white/70 font-semibold text-sm tracking-wide hover:border-accent/50 hover:text-accent transition-all duration-300 block"
             >
-              LinkedIn →
-            </a>
+              💬 Ask me anything
+            </button>
           </Magnetic>
         </motion.div>
 
