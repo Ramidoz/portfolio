@@ -2,8 +2,6 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
-const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%";
-
 /* Magnetic wrapper — children drift toward the cursor while hovered */
 function Magnetic({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -31,26 +29,6 @@ function Magnetic({ children }: { children: React.ReactNode }) {
       {children}
     </div>
   );
-}
-
-function scramble(el: HTMLElement, finalText: string, duration = 1200) {
-  let frame = 0;
-  const totalFrames = Math.round(duration / 16);
-  const interval = setInterval(() => {
-    el.textContent = finalText
-      .split("")
-      .map((char, i) => {
-        if (char === " ") return " ";
-        if (frame / totalFrames > i / finalText.length) return char;
-        return CHARS[Math.floor(Math.random() * CHARS.length)];
-      })
-      .join("");
-    frame++;
-    if (frame >= totalFrames) {
-      el.textContent = finalText;
-      clearInterval(interval);
-    }
-  }, 16);
 }
 
 // Floating ML code snippets
@@ -90,8 +68,6 @@ const LAYER_COLORS = [
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const nameRef = useRef<HTMLSpanElement>(null);
-  const titleRef = useRef<HTMLSpanElement>(null);
 
   /* ── Neural network + floating snippets canvas ── */
   useEffect(() => {
@@ -407,25 +383,14 @@ export default function Hero() {
     };
   }, []);
 
-  /* ── Scramble text on mount ── */
-  useEffect(() => {
-    const t1 = setTimeout(() => {
-      if (nameRef.current) scramble(nameRef.current, "Rohit Ananthan", 1400);
-    }, 400);
-    const t2 = setTimeout(() => {
-      if (titleRef.current) scramble(titleRef.current, "Data Scientist & AI Engineer", 1000);
-    }, 900);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, []);
-
   const scrollToAbout = () => {
     document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Neural network canvas */}
-      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
+      {/* Neural network canvas — ambient, dialed back */}
+      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none opacity-60" />
 
       {/* Subtle dot-grid overlay */}
       <div
@@ -439,96 +404,97 @@ export default function Hero() {
         }}
       />
 
-      {/* Scanline sweep */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-        <div className="scanline absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
-      </div>
-
       {/* ── Hero Content ── */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      <div className="relative z-10 text-center px-6 pt-24 pb-28 max-w-5xl mx-auto">
 
-        {/* ML-style status badge */}
+        {/* Portrait */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="mb-7 flex justify-center"
+        >
+          <div className="relative inline-block">
+            <div className="absolute -inset-1.5 rounded-full bg-gradient-to-br from-accent/60 via-accent-purple/40 to-transparent blur-[6px]" aria-hidden="true" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/avatar.png"
+              alt="Portrait of Rohit Ananthan"
+              className="relative h-32 w-32 md:h-36 md:w-36 rounded-full object-cover border-2 border-white/15"
+            />
+            <span className="absolute bottom-1.5 right-1.5 grid h-8 w-8 place-items-center rounded-full bg-[#0b0b12] border border-white/15 text-base">
+              👋
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Availability badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="relative inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full text-accent text-sm font-mono overflow-hidden"
+          transition={{ delay: 0.15, duration: 0.6 }}
+          className="mb-7 inline-flex items-center gap-2.5 rounded-full px-4 py-2 text-sm"
           style={{
-            border: "1px solid rgba(0,212,255,0.3)",
-            background: "rgba(0,212,255,0.04)",
+            border: "1px solid rgba(0,212,255,0.25)",
+            background: "rgba(0,212,255,0.05)",
           }}
         >
-          {/* Shimmer sweep */}
-          <motion.div
-            className="absolute inset-0 pointer-events-none"
-            animate={{ x: ["-100%", "200%"] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 2 }}
-            style={{
-              background: "linear-gradient(90deg, transparent, rgba(0,212,255,0.12), transparent)",
-              width: "50%",
-            }}
-          />
-          <span className="w-2 h-2 rounded-full bg-accent animate-pulse relative z-10" />
-          <span className="relative z-10">
-            {'{ status: "open_to_hire", roles: ["DS", "DE", "AI Eng"] }'}
-          </span>
+          <span className="h-2 w-2 rounded-full bg-[#a3e635] animate-pulse" />
+          <span className="text-white/80">Open to Data Science &amp; AI roles</span>
         </motion.div>
 
-        {/* Name with scramble */}
+        {/* Name */}
         <motion.h1
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.4 }}
-          className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-4 leading-none tracking-tight"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25, duration: 0.6 }}
+          className="font-display text-5xl md:text-7xl font-bold mb-4 leading-none tracking-tight"
         >
-          <span ref={nameRef} className="gradient-text-animated">
-            {"R#hît @nànt#àn"}
-          </span>
+          <span className="text-white">Hi, I&apos;m </span>
+          <span className="gradient-text-animated">Rohit</span>
         </motion.h1>
 
-        {/* Title with scramble */}
+        {/* Title */}
         <motion.h2
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.4 }}
-          className="text-xl md:text-3xl font-light text-text-secondary mb-6 font-mono tracking-widest uppercase"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="text-xl md:text-2xl font-medium text-white/85 mb-6"
         >
-          <span ref={titleRef}>{"D@ta $c!ent!st & A! Eng!neer"}</span>
+          Data Scientist &amp; AI Engineer
         </motion.h2>
 
-        {/* ML-flavored tagline */}
+        {/* Tagline */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
+          transition={{ delay: 0.55, duration: 0.6 }}
           className="text-text-secondary text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Model trained on 4+ years of real-world data — converging on{" "}
-          <span className="text-accent font-mono">AI/ML</span>,{" "}
-          <span className="text-accent font-mono">product analytics</span> &{" "}
-          <span className="text-accent font-mono">GenAI</span>{" "}
-          problems with GCP, AWS, LLMs &amp; real-time inference pipelines.{" "}
-          <span className="text-white/25 font-mono text-sm">val_loss → 0.0000 ✓</span>
+          I spend my days turning messy, real-world data into AI systems people
+          actually use — multi-agent pipelines for healthcare, fraud detection
+          watching 5M+ transactions a day, and LLM apps that save teams real
+          hours. Currently building with Python, GCP, Azure &amp; GPT-4o.
         </motion.p>
 
-        {/* Stats as ML metrics */}
+        {/* Human stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4, duration: 0.6 }}
-          className="flex flex-wrap justify-center gap-10 mb-12"
+          transition={{ delay: 0.7, duration: 0.6 }}
+          className="flex flex-wrap justify-center gap-x-10 gap-y-5 mb-12"
         >
           {[
-            { v: "4+",     l: "epochs (yrs)" },
-            { v: "GPT-4o", l: "backbone LLM"  },
-            { v: "60%↓",   l: "ETL latency"   },
-            { v: "40%↓",   l: "review time"   },
+            { v: "4+ yrs",  l: "in production ML" },
+            { v: "10+",     l: "ML projects shipped" },
+            { v: "Springer", l: "published research" },
+            { v: "2×",      l: "AI certifications" },
           ].map((s) => (
-            <div key={s.l} className="text-center group">
-              <div className="text-2xl font-bold text-accent font-mono group-hover:text-glow transition-all duration-300">
+            <div key={s.l} className="text-center">
+              <div className="font-display text-2xl font-bold text-white">
                 {s.v}
               </div>
-              <div className="text-xs text-text-secondary mt-1 tracking-wide uppercase font-mono">
+              <div className="text-xs text-text-secondary mt-1 tracking-wide">
                 {s.l}
               </div>
             </div>
@@ -548,7 +514,7 @@ export default function Hero() {
               className="relative px-8 py-3.5 rounded-xl bg-accent text-background font-semibold text-sm tracking-wide overflow-hidden group"
             >
               <span className="relative z-10 group-hover:text-white transition-colors">
-                View My Work
+                See my work ↓
               </span>
               <motion.div
                 className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -595,19 +561,6 @@ export default function Hero() {
           </Magnetic>
         </motion.div>
 
-        {/* Hidden-feature hint */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.4, duration: 0.8 }}
-          className="hidden md:block mt-8 font-mono text-[11px] text-white/30"
-        >
-          pro tip: <kbd className="border border-white/15 rounded px-1 text-white/45">`</kbd> opens a shell
-          <span className="mx-2 text-white/15">·</span>
-          <kbd className="border border-white/15 rounded px-1 text-white/45">⌘K</kbd> opens the palette
-          <span className="mx-2 text-white/15">·</span>
-          <span className="text-white/20">and there&apos;s a secret code</span>
-        </motion.p>
       </div>
 
       {/* Scroll indicator */}
