@@ -27,7 +27,7 @@ const HELP: Line[] = [
   out("  projects      featured builds"),
   out("  experience    employment history"),
   out("  contact       open a channel"),
-  out("  resume        download resume (.docx)"),
+  out("  resume        download resume (.pdf)"),
   out("  overdrive     toggle overdrive mode"),
   out("  matrix        follow the white rabbit"),
   out("  sudo hire rohit    (recommended)"),
@@ -104,7 +104,7 @@ function runCommand(raw: string): { lines: Line[]; action?: string } {
         ],
       };
     case "resume":
-      return { lines: [ok("fetching Rohit_Ananthan_Resume.docx …")], action: "resume" };
+      return { lines: [ok("fetching Rohit_Ananthan_Resume.pdf …")], action: "resume" };
     case "overdrive":
       return { lines: [], action: "overdrive" };
     case "matrix":
@@ -233,7 +233,7 @@ export default function Terminal() {
     setLines((l) => [...l, echo, ...outLines]);
 
     if (action === "resume") {
-      setTimeout(() => { window.location.href = "/Rohit_Ananthan_Resume.docx"; }, 400);
+      setTimeout(() => { window.location.href = "/Rohit_Ananthan_Resume.pdf"; }, 400);
     } else if (action === "hire") {
       setTimeout(() => {
         window.location.href =

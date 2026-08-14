@@ -526,7 +526,7 @@ export default function Hero() {
 
           <Magnetic>
             <a
-              href="/Rohit_Ananthan_Resume.docx"
+              href="/Rohit_Ananthan_Resume.pdf"
               download
               className="px-8 py-3.5 rounded-xl font-semibold text-sm tracking-wide flex items-center gap-2 transition-all duration-300 group"
               style={{

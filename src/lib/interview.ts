@@ -107,7 +107,7 @@ export const INTERVIEW_CORPUS: QA[] = [
       "I'm always curious, never desperate. If your team ships interesting things — real ML in production, agentic systems, problems with structure — I'm up for a conversation. Data Scientist, AI Engineer, ML Engineer shapes all fit. Salary and logistics are conversations for the human me, who is reasonable and replies within a day.",
     links: [
       { label: "Email Rohit", href: "mailto:rohitananthan123@gmail.com?subject=Saw your portfolio" },
-      { label: "Resume", href: "/Rohit_Ananthan_Resume.docx" },
+      { label: "Resume", href: "/Rohit_Ananthan_Resume.pdf" },
     ],
   },
   {

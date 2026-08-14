@@ -62,8 +62,8 @@ export default function CommandPalette() {
         },
       },
       {
-        id: "resume", label: "Download Resume", hint: "↓", icon: "⬇", keywords: "resume cv download docx",
-        run: () => { close(); window.location.href = "/Rohit_Ananthan_Resume.docx"; },
+        id: "resume", label: "Download Resume", hint: "↓", icon: "⬇", keywords: "resume cv download pdf",
+        run: () => { close(); window.location.href = "/Rohit_Ananthan_Resume.pdf"; },
       },
       {
         id: "email", label: "Copy Email Address", hint: "⧉", icon: "✉", keywords: "email copy mail gmail contact",
